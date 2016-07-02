@@ -12,5 +12,18 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.styles([
+        'front/easy-responsive-tabs.css',
+        'front/etalage.css',
+        'front/style.css'
+    ], 'public/assets/css/front.css');
+
+    mix.scripts([
+        'front/jquery-1.9.0.min.js',
+        'front/jquery.openCarousel.js',
+        'front/easing.js',
+        'front/move-top.js',
+        'front/navigation.js',
+        'front/script.js'
+    ], 'public/assets/js/front.js');
 });
