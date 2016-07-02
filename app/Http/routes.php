@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front.index');
+Route::group(['middleware' => ['web']], function () {
+
+    // Homepage
+    Route::get('/', [
+        'uses' => 'HomeController@index',
+        'as' => 'home'
+    ]);
+
+    // Administrator
+    Route::get('admin', [
+        'uses' => 'AdminController@index',
+        'as' => 'admin',
+        'middleware' => 'admin'
+    ]);
+
+    // Authentication routes...
+    Route::get('auth/login', 'Auth\AuthController@getLogin');
+    Route::post('auth/login', 'Auth\AuthController@postLogin');
 });
