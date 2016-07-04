@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 class AdminController extends Controller
 {
-
     /**
      * Display the home page.
      *
@@ -12,6 +11,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('front.index');
+        return view('back.index');
     }
 }

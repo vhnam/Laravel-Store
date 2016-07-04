@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['guest']], function () {
 
     // Homepage
     Route::get('/', [
@@ -19,14 +19,22 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'home'
     ]);
 
+    // Authentication routes...
+    Route::get('admin/login', [
+        'uses' => 'Auth\AuthController@getLogin',
+        'as' => 'login'
+    ]);
+
+    Route::post('admin/login', [
+        'uses' => 'Auth\AuthController@postLogin',
+        'as' => 'login'
+    ]);
+});
+
+Route::group(['middleware' => ['auth']], function() {
     // Administrator
     Route::get('admin', [
         'uses' => 'AdminController@index',
-        'as' => 'admin',
-        'middleware' => 'admin'
+        'as' => 'admin'
     ]);
-
-    // Authentication routes...
-    Route::get('auth/login', 'Auth\AuthController@getLogin');
-    Route::post('auth/login', 'Auth\AuthController@postLogin');
 });

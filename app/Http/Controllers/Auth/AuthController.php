@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Contracts\Auth\Guard;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new authentication controller instance.
@@ -37,36 +38,62 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Handle a login request to the application.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  App\Http\Requests\Auth\LoginRequest  $request
+     * @param  Guard  $auth
+     * @return Response
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-    }
+    public function postLogin(LoginRequest $request, Guard $auth) {
+        $email = $request->input('email');
+        $password = $request->input('password');
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $emailAccess = filter_var($email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $throttles = in_array(ThrottlesLogins::class, class_uses_recursive(get_class($this)));
+
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return redirect('/admin/login')
+                ->with('error', trans('auth/login.maxattempt'))
+                ->withInput($request->only('email'));
+        }
+
+        $credentials = [
+            $emailAccess  => $email,
+            'password'  => $password
+        ];
+
+        if (!$auth->validate($credentials)) {
+            if ($throttles) {
+                $this->incrementLoginAttempts($request);
+            }
+
+            return redirect('/admin/login')
+                ->with('error', trans('auth/login.credentials'));
+        }
+
+        $user = $auth->getLastAttempted();
+
+        if ($user->exists()) {
+            if ($throttles) {
+                $this->clearLoginAttempts($request);
+            }
+
+            if($request->session()->has('user_id')) {
+                $request->session()->forget('user_id');
+            }
+
+            $auth->login($user);
+
+            return redirect('/admin');
+        }
+
+        $request->session()->put('user_id', $user->id);
+
+        return redirect('/admin/login')
+            ->with('error', trans('auth/login.credentials'));
     }
 }

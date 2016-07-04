@@ -12,19 +12,24 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="/">
-                    <h1>Laravel Store</h1>
-                </a>
+                <h1><a href="/">Laravel Store</a></h1>
             </div><!-- /.login-logo -->
 
             <div class="login-box-body">
-                <form action="login" method="post">
+                <form action="/admin/login" method="post">
+                    @if (session()->has('error'))
+                        @include('partials/error', [
+                            'type' => 'danger',
+                            'message' => session('error')
+                        ]);
+                    @endif
+
                     <div class="form-group has-feedback">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="{{ trans('auth/login.password') }}">
+                        <input type="password" name="password" class="form-control" placeholder="{{ trans('auth/login.password') }}">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
