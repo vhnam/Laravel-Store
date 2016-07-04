@@ -37,4 +37,10 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'AdminController@index',
         'as' => 'admin'
     ]);
+
+    // Authentication routes...
+    Route::get('admin/logout', [
+        'uses' => 'Auth\AuthController@logout',
+        'as' => 'logout'
+    ]);
 });

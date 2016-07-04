@@ -1,0 +1,36 @@
+/* Navbar Header */
+.navbar-top-links a {
+    color: #e0e0e0;
+}
+
+/* Sidebar */
+.sb-info {
+    margin: 16px 0;
+    text-align: center;
+}
+
+.sb-info img {
+    width: 96px;
+}
+
+.sb-info-content {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.sb-info-content li {
+    border-bottom: none !important;
+}
+
+.sb-info-name {
+    font-size: 1em;
+    color: #F44336;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+.sb-info-role {
+    font-size: .8em;
+}

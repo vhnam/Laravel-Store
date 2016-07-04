@@ -29,14 +29,14 @@ elixir(function(mix) {
         'front/script.js'
     ], 'public/assets/js/front.js');
 
-
     // Back-End
     mix.styles([
         'back/bootstrap.min.css',
         'back/font-awesome.min.css',
         'back/metisMenu.min.css',
         'back/timeline.css',
-        'back/sb-admin-2.css'
+        'back/sb-admin-2.css',
+        'back/custom.css'
     ], 'public/assets/css/back.css');
 
     mix.scripts([
