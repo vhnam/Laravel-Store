@@ -14,9 +14,9 @@ class BrandController extends Controller
      */
     public function showBackendBrands()
     {
-    	$brands = Brand::all();
+        $brands = Brand::all();
 
         return view('back.brands')
-        	->with('brands', $brands);
+            ->with('brands', $brands);
     }
 }

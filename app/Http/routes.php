@@ -49,4 +49,10 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'BrandController@showBackendBrands',
         'as' => 'brands'
     ]);
+
+    // Types
+    Route::get('admin/types', [
+        'uses' => 'TypeController@showBackendTypes',
+        'as' => 'types'
+    ]);
 });
