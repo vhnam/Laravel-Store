@@ -68,3 +68,13 @@
 .table-type-item-button {
     width: 100px;
 }
+
+/* List of Categories */
+.table-category-add {
+    text-align: right;
+    padding: 16px 0 32px;
+}
+
+.table-category-item-button {
+    width: 100px;
+}

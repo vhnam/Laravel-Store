@@ -243,5 +243,9 @@ $('#types-table').DataTable({
     responsive: true
 });
 
+$('#categories-table').DataTable({
+    responsive: true
+});
+
 })();
 //# sourceMappingURL=back.js.map

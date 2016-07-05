@@ -10,4 +10,8 @@ $('#types-table').DataTable({
     responsive: true
 });
 
+$('#categories-table').DataTable({
+    responsive: true
+});
+
 })();

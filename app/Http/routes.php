@@ -55,4 +55,10 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'TypeController@showBackendTypes',
         'as' => 'types'
     ]);
+
+    // Categories
+    Route::get('admin/categories', [
+        'uses' => 'CategoryController@showBackendCategories',
+        'as' => 'categories'
+    ]);
 });
