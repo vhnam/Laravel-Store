@@ -43,4 +43,10 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'Auth\AuthController@logout',
         'as' => 'logout'
     ]);
+
+    // Brands
+    Route::get('admin/brands', [
+        'uses' => 'BrandController@showBackendBrands',
+        'as' => 'brands'
+    ]);
 });
