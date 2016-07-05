@@ -1,5 +1,10 @@
 <?php
 
 return [
-    'title' => 'Brands'
+    'title' => 'Brands',
+    'buttonAdd' => 'Add Brand',
+    'buttonUpdate' => 'Update',
+    'tableTitleName' => 'Name',
+    'tableTitlePhoto' => 'Photo',
+    'tableTitleDescription' => 'Description'
 ];

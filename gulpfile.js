@@ -35,6 +35,7 @@ elixir(function(mix) {
         'back/font-awesome.min.css',
         'back/metisMenu.min.css',
         'back/timeline.css',
+        'back/jquery.datatables.min.css',
         'back/sb-admin-2.css',
         'back/custom.css'
     ], 'public/assets/css/back.css');
@@ -43,6 +44,8 @@ elixir(function(mix) {
         'back/jquery.min.js',
         'back/bootstrap.min.js',
         'back/metisMenu.min.js',
-        'back/sb-admin-2.js'
+        'back/jquery.datatables.min.js',
+        'back/sb-admin-2.js',
+        'back/script.js'
     ], 'public/assets/js/back.js');
 });

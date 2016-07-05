@@ -12,4 +12,14 @@ class Type extends Model
      * @var string
      */
     protected $table = 'types';
+
+    /**
+     * One to Many relation
+     *
+     * @return Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function products()
+    {
+      return $this->hasMany('App\Models\Product');
+    }
 }

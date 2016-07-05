@@ -12,4 +12,14 @@ class Brand extends Model
      * @var string
      */
     protected $table = 'brands';
+
+    /**
+     * One to Many relation
+     *
+     * @return Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function products()
+    {
+      return $this->hasMany('App\Models\Product');
+    }
 }

@@ -3,6 +3,11 @@
     color: #e0e0e0;
 }
 
+/* Page Wrapper */
+#page-wrapper {
+    padding-bottom: 32px;
+}
+
 /* Sidebar */
 .sb-info {
     margin: 16px 0;
@@ -33,4 +38,23 @@
 
 .sb-info-role {
     font-size: .8em;
+}
+
+/* List of Brands */
+.table-brand-add {
+    text-align: right;
+    padding: 16px 0 32px;
+}
+
+.table-brand-item-name {
+    width: 130px;
+    text-align: center;
+}
+
+.table-brand-item-brand {
+    vertical-align: middle !important;
+}
+
+.table-brand-item-brand img {
+    max-width: 120px;
 }
