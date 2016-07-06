@@ -5,11 +5,38 @@ namespace App\Http\Controllers;
 use Input;
 use Illuminate\Http\Request;
 use \Illuminate\Database\QueryException as QueryException;
+
 use App\Models\Brand;
 use App\Http\Requests\BrandRequest;
+use App\Repositories\BrandRepository;
 
 class BrandController extends Controller
 {
+
+    /**
+     * The BrandRepository instance.
+     *
+     * @var App\Repositories\BrandRepository
+     */
+    protected $brand_repository;
+
+    /**
+     * The pagination number.
+     *
+     * @var int
+     */
+    protected $limit;
+
+    /**
+     * Create a new BrandController instance.
+     *
+     * @param  App\Repositories\BrandRepository $brand_repository
+     * @return void
+    */
+    public function __construct(BrandRepository $brand_repository) {
+        $this->limit = 20;
+        $this->brand_repository = $brand_repository;
+    }
 
     /**
      * Display list of brands for Back-End.
@@ -18,7 +45,7 @@ class BrandController extends Controller
      */
     public function showBackendBrands()
     {
-        $brands = Brand::paginate(20);
+        $brands = $this->brand_repository->indexFront($this->limit);
 
         return view('back.brands')
             ->with('brands', $brands);
@@ -44,17 +71,7 @@ class BrandController extends Controller
     {
         try {
 
-            $file = $request->file('photo');
-
-            if ($file && $file->isValid()) {
-                $fileName = strtolower($request->name) . '.' . $file->getClientOriginalExtension();
-                $file->move('brands', $fileName);
-
-                $brand = new Brand;
-                $brand->name = $request->name;
-                $brand->description = $request->description;
-                $brand->photo = $fileName;
-                $brand->save();
+            if ($this->brand_repository->create($request)) {
 
                 return redirect('/admin/brands')
                     ->with([
@@ -100,16 +117,8 @@ class BrandController extends Controller
     public function handleUpdate(Request $request, Brand $brand)
     {
         try {
-            $file = $request->file('photo');
 
-            if ($file && $file->isValid()) {
-                $fileName = strtolower($request->name) . '.' . $file->getClientOriginalExtension();
-                $file->move('brands', $fileName);
-
-                $brand->name = $request->name;
-                $brand->description = $request->description;
-                $brand->photo = $fileName;
-                $brand->save();
+            if ($this->brand_repository->update($request, $brand)) {
 
                 return redirect('/admin/brands/' . $brand->id)
                 ->with([

@@ -13,7 +13,7 @@ class BrandRequest extends Request {
     {
         return [
             'name' => 'required|max:100',
-            'description' => 'required|max:255'
+            'description' => 'required'
         ];
     }
 
