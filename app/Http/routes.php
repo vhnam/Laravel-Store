@@ -61,4 +61,24 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'CategoryController@showBackendCategories',
         'as' => 'categories'
     ]);
+
+    Route::get('admin/categories/create', [
+        'uses' => 'CategoryController@create',
+        'as' => 'categories'
+    ]);
+
+    Route::post('admin/categories/create', [
+        'uses' => 'CategoryController@handleCreate',
+        'as' => 'categories'
+    ]);
+
+    Route::get('admin/categories/{category}', [
+        'uses' => 'CategoryController@update',
+        'as' => 'categories'
+    ]);
+
+    Route::post('admin/categories/{category}', [
+        'uses' => 'CategoryController@handleUpdate',
+        'as' => 'categories'
+    ]);
 });

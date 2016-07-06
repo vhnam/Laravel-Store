@@ -1,3 +1,13 @@
+/* Misc */
+.form-control.form-disabled {
+    background-color: #eee;
+    cursor: no-drop;
+}
+
+.form-alert {
+    margin-top: 16px;
+}
+
 /* Navbar Header */
 .navbar-top-links a {
     color: #e0e0e0;

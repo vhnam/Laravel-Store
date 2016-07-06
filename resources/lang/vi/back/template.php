@@ -13,5 +13,9 @@ return [
     'sidebarItemProducts' => 'Sản phẩm',
     'sidebarItemLanguage' => 'Ngôn ngữ',
     'sidebarSubitemEnglish' => 'Tiếng Anh',
-    'sidebarSubitemEnglish' => 'Tiếng Việt'
+    'sidebarSubitemEnglish' => 'Tiếng Việt',
+    'messageCreateSuccessfully' => 'Thêm mới thành công',
+    'messageCreateFailed' => 'Thêm mới thất bại!',
+    'messageUpdateSuccessfully' => 'Cập nhật thành công!',
+    'messageUpdateFailed' => 'Cập nhật thất bại!'
 ];

@@ -21,7 +21,7 @@
                         </div>
                         <div class="panel-body">
                             @if (session()->has('error'))
-                                @include('partials/error', [
+                                @include('partials/message', [
                                     'type' => 'danger',
                                     'message' => session('error')
                                 ]);

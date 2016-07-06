@@ -13,5 +13,9 @@ return [
     'sidebarItemProducts' => 'Products',
     'sidebarItemLanguage' => 'Language',
     'sidebarSubitemEnglish' => 'English',
-    'sidebarSubitemVietnamese' => 'Vietnamese'
+    'sidebarSubitemVietnamese' => 'Vietnamese',
+    'messageCreateSuccessfully' => 'Create Successfully!',
+    'messageCreateFailed' => 'Create Failed!',
+    'messageUpdateSuccessfully' => 'Update Successfully!',
+    'messageUpdateFailed' => 'Update Failed!'
 ];

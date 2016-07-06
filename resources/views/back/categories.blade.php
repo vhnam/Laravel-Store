@@ -10,6 +10,12 @@
 
 <div class="row">
     <div class="col-lg-12">
+        @if (session()->has('message'))
+            @include('partials/message', [
+                'type' => session('type'),
+                'message' => session('message')
+            ]);
+        @endif
         <div class="table-category-add">
             <a href="/admin/categories/create">
                 <button type="button" class="btn btn-primary">{{ trans('back/categories.buttonAdd') }}</button>
