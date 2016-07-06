@@ -11,14 +11,14 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="col-lg-6">
-            <form method="post" action="/admin/categories/{{ $category->id }}" role="form">
+            <form method="post" action="/admin/categories/{{ $category->id }}" role="form" autocomplete="off">
                 <div class="form-group">
                     <label>{{ trans('back/categories.formOldName') }}</label>
                     <div class="form-control form-disabled">{{ $category->name }}</div>
                 </div>
                 <div class="form-group">
                     <label>{{ trans('back/categories.formNewName') }}</label>
-                    <input class="form-control" name="categoryNewName" type="text" value="{{ $category->name }}">
+                    <input class="form-control" name="categoryNewName" spellcheck="false" type="text" value="{{ $category->name }}">
                 </div>
                 {{ csrf_field() }}
                 <a href="/admin/categories">

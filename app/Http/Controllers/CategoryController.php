@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function showBackendCategories()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(20);
 
         return view('back.categories')
             ->with('categories', $categories);

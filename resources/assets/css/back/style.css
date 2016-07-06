@@ -8,6 +8,10 @@
     margin-top: 16px;
 }
 
+.center {
+    text-align: center;
+}
+
 /* Navbar Header */
 .navbar-top-links a {
     color: #e0e0e0;
@@ -77,6 +81,7 @@
 
 .table-type-item-button {
     width: 100px;
+    text-align: center;
 }
 
 /* List of Categories */
@@ -87,4 +92,5 @@
 
 .table-category-item-button {
     width: 100px;
+    text-align: center;
 }

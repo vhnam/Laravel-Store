@@ -22,7 +22,7 @@
             </a>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="categories-table">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -45,6 +45,9 @@
                 </tbody>
             </table>
         </div>
+        <nav class="center">
+            {{ $categories->links() }}
+        </nav>
     </div>
 </div>
 
