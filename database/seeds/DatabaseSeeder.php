@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
 
         Brand::create([
             'name' => 'Vincent Bach',
-            'photo' => 'vincent-bach.png',
+            'photo' => 'vincent bach.png',
             'description' => 'The Vincent Bach Corporation is an American manufacturer of brass musical instruments that began early in the twentieth century and still exists as a subsidiary of Conn-Selmer, a division of Steinway Musical Instruments.'
         ]);
 

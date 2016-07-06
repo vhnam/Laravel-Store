@@ -50,6 +50,26 @@ Route::group(['middleware' => ['auth']], function() {
         'as' => 'brands'
     ]);
 
+    Route::get('admin/brands/create', [
+        'uses' => 'BrandController@create',
+        'as' => 'brands'
+    ]);
+
+    Route::post('admin/brands/create', [
+        'uses' => 'BrandController@handleCreate',
+        'as' => 'brands'
+    ]);
+
+    Route::get('admin/brands/{brand}', [
+        'uses' => 'BrandController@update',
+        'as' => 'brands'
+    ]);
+
+    Route::post('admin/brands/{brand}', [
+        'uses' => 'BrandController@handleUpdate',
+        'as' => 'brands'
+    ]);
+
     // Types
     Route::get('admin/types', [
         'uses' => 'TypeController@showBackendTypes',

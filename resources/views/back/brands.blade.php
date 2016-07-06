@@ -10,6 +10,12 @@
 
 <div class="row">
     <div class="col-lg-12">
+        @if (session()->has('message'))
+            @include('partials/message', [
+                'type' => session('messageType'),
+                'message' => session('message')
+            ]);
+        @endif
         <div class="table-brand-add">
             <a href="/admin/brands/create">
                 <button type="button" class="btn btn-primary">{{ trans('back/brands.buttonAdd') }}</button>

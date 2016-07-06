@@ -11,10 +11,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="col-lg-6">
-            <form method="post" action="/admin/categories/create" role="form">
+            <form method="post" action="/admin/categories/create" role="form" autocomplete="off">
                 <div class="form-group">
                     <label>{{ trans('back/categories.formName') }}</label>
-                    <input class="form-control" name="name" type="text" placeholder="{{ trans('back/categories.formName') }}">
+                    <input class="form-control" name="name" type="text" spellcheck="false" placeholder="{{ trans('back/categories.formName') }}">
                 </div>
                 {{ csrf_field() }}
                 <a href="/admin/categories">
