@@ -56,6 +56,26 @@ Route::group(['middleware' => ['auth']], function() {
         'as' => 'types'
     ]);
 
+    Route::get('admin/types/create', [
+        'uses' => 'TypeController@create',
+        'as' => 'types'
+    ]);
+
+    Route::post('admin/types/create', [
+        'uses' => 'TypeController@handleCreate',
+        'as' => 'types'
+    ]);
+
+    Route::get('admin/types/{type}', [
+        'uses' => 'TypeController@update',
+        'as' => 'types'
+    ]);
+
+    Route::post('admin/types/{type}', [
+        'uses' => 'TypeController@handleUpdate',
+        'as' => 'types'
+    ]);
+
     // Categories
     Route::get('admin/categories', [
         'uses' => 'CategoryController@showBackendCategories',

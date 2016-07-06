@@ -10,13 +10,19 @@
 
 <div class="row">
     <div class="col-lg-12">
+        @if (session()->has('message'))
+            @include('partials/message', [
+                'type' => session('messageType'),
+                'message' => session('message')
+            ]);
+        @endif
         <div class="table-type-add">
             <a href="/admin/types/create">
                 <button type="button" class="btn btn-primary">{{ trans('back/types.buttonAdd') }}</button>
             </a>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="types-table">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -39,6 +45,9 @@
                 </tbody>
             </table>
         </div>
+        <nav class="center">
+            {{ $types->links() }}
+        </nav>
     </div>
 </div>
 

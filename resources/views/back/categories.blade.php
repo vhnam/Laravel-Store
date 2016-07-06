@@ -12,7 +12,7 @@
     <div class="col-lg-12">
         @if (session()->has('message'))
             @include('partials/message', [
-                'type' => session('type'),
+                'type' => session('messageType'),
                 'message' => session('message')
             ]);
         @endif

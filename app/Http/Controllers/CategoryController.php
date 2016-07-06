@@ -36,6 +36,7 @@ class CategoryController extends Controller
     /**
      * Handle create a new category.
      *
+     * @param  App\Http\Requests\CategoryRequest  $request
      * @return Response
      */
     public function handleCreate(CategoryRequest $request)
@@ -47,13 +48,13 @@ class CategoryController extends Controller
 
             return redirect('/admin/categories')
                 ->with([
-                    'type' => 'success',
+                    'messageType' => 'success',
                     'message' => trans('back/template.messageCreateSuccessfully')
                 ]);
         } catch(QueryException $e) {
             return redirect('/admin/categories/create')
                 ->with([
-                    'type' => 'danger',
+                    'messageType' => 'danger',
                     'message' => trans('back/template.messageCreateFailed')
                 ]);
         }
@@ -87,14 +88,14 @@ class CategoryController extends Controller
 
             return redirect('/admin/categories/' . $category->id)
                 ->with([
-                    'type' => 'success',
+                    'messageType' => 'success',
                     'message' => trans('back/template.messageUpdateSuccessfully'),
                     'category' => $category
                 ]);
         } catch(QueryException $e) {
             return redirect('/admin/categories/' . $category->id)
                 ->with([
-                    'type' => 'danger',
+                    'messageType' => 'danger',
                     'message' => trans('back/template.messageUpdateFailed'),
                     'category' => $category
                 ]);
