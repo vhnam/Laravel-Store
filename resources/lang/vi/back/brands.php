@@ -15,5 +15,8 @@ return [
     'formAccept' => 'Xác nhận',
     'formOldName' => 'Tên cũ',
     'formNewName' => 'Tên mới',
-    'formPhoto' => 'Hình ảnh'
+    'formPhoto' => 'Hình ảnh',
+    'requestNameRequired' => 'Tên không được bỏ trống.',
+    'requestNameMax' => 'Tên quá dài.',
+    'requestDescriptionRequired' => 'Mô tả không được bỏ trống.'
 ];

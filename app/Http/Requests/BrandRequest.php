@@ -17,4 +17,16 @@ class BrandRequest extends Request {
         ];
     }
 
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages() {
+        return [
+            'name.required' => trans('back/brands.requestNameRequired'),
+            'name.max' => trans('back/brands.requestNameMax'),
+            'description.required' => trans('back/brands.requestDescriptionRequired')
+        ];
+    }
 }

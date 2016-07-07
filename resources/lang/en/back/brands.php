@@ -15,5 +15,8 @@ return [
     'formAccept' => 'Accept',
     'formOldName' => 'Old name',
     'formNewName' => 'New name',
-    'formPhoto' => 'Photo'
+    'formPhoto' => 'Photo',
+    'requestNameRequired' => 'Name must not be left blank.',
+    'requestNameMax' => 'Name too long.',
+    'requestDescriptionRequired' => 'Description must not be left blank.'
 ];

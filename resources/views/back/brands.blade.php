@@ -51,6 +51,9 @@
                 </tbody>
             </table>
         </div>
+        <nav class="center">
+            {{ $brands->links() }}
+        </nav>
     </div>
 </div>
 
