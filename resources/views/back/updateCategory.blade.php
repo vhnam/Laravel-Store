@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label>{{ trans('back/categories.formNewName') }}</label>
-                    <input class="form-control" name="categoryNewName" spellcheck="false" type="text" value="{{ $category->name }}">
+                    <input class="form-control" name="name" spellcheck="false" type="text" value="{{ $category->name }}">
                 </div>
                 {{ csrf_field() }}
                 <a href="/admin/categories">

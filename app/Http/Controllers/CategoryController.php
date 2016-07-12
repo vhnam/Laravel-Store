@@ -4,11 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Illuminate\Database\QueryException as QueryException;
+
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
+
+    /**
+     * The CategoryRepository instance.
+     *
+     * @var App\Repositories\CategoryRepository
+     */
+    protected $category_repository;
+
+    /**
+     * The pagination number.
+     *
+     * @var int
+     */
+    protected $limit;
+
+    /**
+     * Create a new CategoryController instance.
+     *
+     * @param  App\Repositories\CategoryRepository $category_repository
+     * @return void
+    */
+    public function __construct(CategoryRepository $category_repository) {
+        $this->limit = 20;
+        $this->category_repository = $category_repository;
+    }
 
     /**
      * Display list of categories for Back-End.
@@ -17,7 +44,7 @@ class CategoryController extends Controller
      */
     public function showBackendCategories()
     {
-        $categories = Category::paginate(20);
+        $categories = $this->category_repository->indexFront($this->limit);
 
         return view('back.categories')
             ->with('categories', $categories);
@@ -42,14 +69,18 @@ class CategoryController extends Controller
     public function handleCreate(CategoryRequest $request)
     {
         try {
-            $category = new Category;
-            $category->name = $request->name;
-            $category->save();
+            if ($this->category_repository->create($request)) {
+                return redirect('/admin/categories')
+                    ->with([
+                        'messageType' => 'success',
+                        'message' => trans('back/template.messageCreateSuccessfully')
+                    ]);
+            }
 
-            return redirect('/admin/categories')
+            return redirect('/admin/categories/create')
                 ->with([
-                    'messageType' => 'success',
-                    'message' => trans('back/template.messageCreateSuccessfully')
+                    'messageType' => 'danger',
+                    'message' => trans('back/template.messageCreateFailed')
                 ]);
         } catch(QueryException $e) {
             return redirect('/admin/categories/create')
@@ -83,13 +114,19 @@ class CategoryController extends Controller
     public function handleUpdate(Request $request, Category $category)
     {
         try {
-            $category->name = $request->categoryNewName;
-            $category->save();
+            if ($this->category_repository->update($request, $category)) {
+                return redirect('/admin/categories/' . $category->id)
+                    ->with([
+                        'messageType' => 'success',
+                        'message' => trans('back/template.messageUpdateSuccessfully'),
+                        'category' => $category
+                    ]);
+            }
 
             return redirect('/admin/categories/' . $category->id)
                 ->with([
-                    'messageType' => 'success',
-                    'message' => trans('back/template.messageUpdateSuccessfully'),
+                    'messageType' => 'danger',
+                    'message' => trans('back/template.messageUpdateFailed'),
                     'category' => $category
                 ]);
         } catch(QueryException $e) {
@@ -99,6 +136,6 @@ class CategoryController extends Controller
                     'message' => trans('back/template.messageUpdateFailed'),
                     'category' => $category
                 ]);
-            }
+        }
     }
 }

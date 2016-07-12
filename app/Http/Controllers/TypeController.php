@@ -4,11 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Illuminate\Database\QueryException as QueryException;
+
 use App\Models\Type;
 use App\Http\Requests\TypeRequest;
+use App\Repositories\TypeRepository;
 
 class TypeController extends Controller
 {
+
+    /**
+     * The TypeRepository instance.
+     *
+     * @var App\Repositories\TypeRepository
+     */
+    protected $type_repository;
+
+    /**
+     * The pagination number.
+     *
+     * @var int
+     */
+    protected $limit;
+
+    /**
+     * Create a new TypeController instance.
+     *
+     * @param  App\Repositories\TypeRepository $type_repository
+     * @return void
+    */
+    public function __construct(TypeRepository $type_repository) {
+        $this->limit = 20;
+        $this->type_repository = $type_repository;
+    }
 
     /**
      * Display list of types for Back-End.
@@ -17,7 +44,7 @@ class TypeController extends Controller
      */
     public function showBackendTypes()
     {
-        $types = Type::paginate(20);
+        $types = $this->type_repository->indexFront($this->limit);
 
         return view('back.types')
             ->with('types', $types);
@@ -42,14 +69,18 @@ class TypeController extends Controller
     public function handleCreate(TypeRequest $request)
     {
         try {
-            $type = new Type;
-            $type->name = $request->name;
-            $type->save();
+            if ($this->type_repository->create($request)) {
+                return redirect('/admin/types')
+                    ->with([
+                        'messageType' => 'success',
+                        'message' => trans('back/template.messageCreateSuccessfully')
+                    ]);
+            }
 
-            return redirect('/admin/types')
+            return redirect('/admin/types/create')
                 ->with([
-                    'messageType' => 'success',
-                    'message' => trans('back/template.messageCreateSuccessfully')
+                    'messageType' => 'danger',
+                    'message' => trans('back/template.messageCreateFailed')
                 ]);
         } catch(QueryException $e) {
             return redirect('/admin/types/create')
@@ -83,13 +114,19 @@ class TypeController extends Controller
     public function handleUpdate(Request $request, Type $type)
     {
         try {
-            $type->name = $request->typeNewName;
-            $type->save();
-
-            return redirect('/admin/types/' . $type->id)
+            if ($this->type_repository->update($request, $type)) {
+                return redirect('/admin/types/' . $type->id)
                 ->with([
                     'messageType' => 'success',
                     'message' => trans('back/template.messageUpdateSuccessfully'),
+                    'type' => $type
+                ]);
+            }
+
+            return redirect('/admin/types/' . $type->id)
+                ->with([
+                    'messageType' => 'danger',
+                    'message' => trans('back/template.messageUpdateFailed'),
                     'type' => $type
                 ]);
         } catch(QueryException $e) {
@@ -99,6 +136,6 @@ class TypeController extends Controller
                     'message' => trans('back/template.messageUpdateFailed'),
                     'type' => $type
                 ]);
-            }
+        }
     }
 }

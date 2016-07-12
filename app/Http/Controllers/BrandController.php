@@ -70,7 +70,6 @@ class BrandController extends Controller
     public function handleCreate(BrandRequest $request)
     {
         try {
-
             if ($this->brand_repository->create($request)) {
 
                 return redirect('/admin/brands')

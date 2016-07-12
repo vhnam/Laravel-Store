@@ -47,9 +47,8 @@ class BrandRepository extends BaseRepository
             $brand->name = $request->name;
             $brand->description = $request->description;
             $brand->photo = $fileName;
-            $brand->save();
 
-            return true;
+            return $brand->save();
         }
 
         return false;
@@ -78,8 +77,7 @@ class BrandRepository extends BaseRepository
 
         $brand->name = $request->name;
         $brand->description = $request->description;
-        $brand->save();
 
-        return true;
+        return $brand->save();
     }
 }
